@@ -1,0 +1,42 @@
+.row {
+    gap: 20px;
+}
+
+.avil {
+    color: white;
+    font-size: 3rem;
+}
+
+.card-body {
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+        -1px -1px 6px rgba(255, 255, 255, 0.4);
+    box-shadow: 6px 6px 20px rgba(0, 0, 0, 1),
+        -2px -2px 12px rgba(15, 35, 255, 0.4);
+
+}
+
+.card {
+    border-radius: 20px;
+
+    background-color: #F8F9FA;
+    color: black;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+        -1px -1px 6px rgba(255, 255, 255, 0.4);
+    box-shadow: 6px 6px 20px rgba(0, 0, 0, 1),
+        -2px -2px 12px rgba(15, 35, 255, 0.4);
+}
+
+.card:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
+}
+.container{
+    margin: auto;
+    padding: auto;
+    height: 100%;
+    width: 100% !important;
+    background-color: #F2F2F2;
+    color: black;
+}

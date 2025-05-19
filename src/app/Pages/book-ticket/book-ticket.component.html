@@ -1,0 +1,154 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title mb-1">{{scheduleData.busName}}</h5>
+                            <p class="text-muted mb-0"><i class="bi bi-calendar3 me-2"></i>{{scheduleData.departureTime|
+                                date:'dd-MM-YYYY'}} <span class="mx-2">•</span><i
+                                    class="bi bi-clock me-2"></i>{{scheduleData.arrivalTime| date:'dd-MM-yyyy'}}
+                            </p>
+                        </div>
+                        <div class="text-end">
+                            <h6 class="mb-1">{{scheduleData.busName}}</h6>
+                            <p class="text-muted mb-0">{{scheduleData.departureTime|
+                                date:'hh:mm:ss'}}-{{scheduleData.arrivalTime | date : "hh:mm:ss"}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="card-title mb-0">Select Seats</h5>
+                        <div class="seat-legend">
+                            <span class="me-3">
+                                <i class="bi bi-square me-1"></i>Available
+                            </span>
+                            <span class="me-3">
+                                <i class="bi bi-square-fill text-secondary me-1"></i>Booked
+                            </span>
+                            <span>
+                                <i class="bi bi-square-fill text-primary me-1"></i>Selected
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bus-layout">
+                        <div class="driver-area mb-4">
+                            <div class="steering"><i class="bi bi-truck-front-fill fs-1" aria-hidden="true"></i></div>
+                            <small class="text-muted d-block mt-2">Front</small>
+                        </div>
+                        <div class="deck">
+                            <div class="seat-grid">
+                                <div class="row">
+                                    @for (item of seatNoList; track $index) {
+                                    <div class="col-3">
+                                        @if (!checkIfBooked(item)) {
+                                        <button class="seat available"
+                                            [ngClass]="checkIfSeatSelected(item)? 'selected' :''"
+                                            (click)="onSelect(item)">{{item}}</button>
+                                        }@else {
+                                            <button class="seat booked">{{item}}</button>
+                                        }
+
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="card booking-summary">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Booking Summary</h5>
+                    <div class="selected-seats mb-4">
+                        <h6 class="mb-3">Selected Seats</h6>
+                        <div id="selectedSeatsList" class="mb-3">
+
+                            @if (selectedSeatArray.length ==0) {
+                            <p class="text-muted mb-0">No seats selected</p>
+                            }
+                            @else {
+                            <div class="selected-seat-tags">
+                                @for (item of selectedSeatArray; track $index) {
+                                <span class="badge bg-primary me-2 mb-2">{{item.seatNo}}</span>
+                                }
+                            </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="contact-details mb-4">
+                        @for (item of selectedSeatArray; track $index) {
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="form-label">
+                                    Name
+                                </label>
+                                <input type="text" [(ngModel)]="item.passengerName" placeholder="Enter Fullname"
+                                    class="form-control ng-untouched ng-pristine ng-valid">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">
+                                    Age
+                                </label>
+                                <input type="number" [(ngModel)]="item.age" placeholder="Enter Your Age"
+                                    class="form-control ng-untouched ng-pristine ng-valid">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">
+                                    Gender
+                                </label>
+                                <br>
+                                <input type="radio" [(ngModel)]="item.gender" value="Male" [name]="'gender' + $index"
+                                    class="ng-untouched ng-pristine ng-valid">
+                                Male
+                                <input type="radio" [(ngModel)]="item.gender" value="FeMale" [name]="'gender' + $index"
+                                    class="ng-untouched ng-pristine ng-valid">
+                                FeMale
+                            </div>
+
+                        </div>
+                        }
+                        <h6 class="mb-3">Contact Details</h6>
+                        <button (click)="bookTicket()" type="button" class="btn btn-primary">
+                            <!-- <i class="bi bi-credit-card me-2"></i> -->
+                            Book Ticket
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="authModal" tabindex="-1" aria-hidden="true" class="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content auth-modal">
+            <div class="modal-body p-4"><button type="button" class="btn-close"></button>
+                <div>
+                    <form novalidate="" class="ng-invalid ng-touched ng-dirty">
+                        <div class="mb-3"><label class="form-label"><i class="bi bi-envelope me-1"></i>Email
+                            </label><input type="email" formcontrolname="userName"
+                                class="form-control ng-untouched ng-pristine ng-invalid"></div>
+                        <div class="mb-3"><label class="form-label"><i class="bi bi-lock me-1"></i>Password
+                            </label><input type="password" formcontrolname="password"
+                                class="form-control ng-touched ng-dirty ng-valid"></div><button type="submit"
+                            class="btn btn-primary w-100 mb-3"><i class="bi bi-box-arrow-in-right me-2"></i>Login
+                        </button>
+                        <p class="text-center mb-0"> Don't have an account? <a data-form="signup"
+                                class="toggle-auth">Sign Up</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

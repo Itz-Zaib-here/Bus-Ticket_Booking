@@ -1,0 +1,48 @@
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 style="color: black;" class="mb-0 avil">Available Buses <i class="fa fa-bus" aria-hidden="true"></i></h2>
+        <div class="d-flex gap-2"><button class="btn btn-outline-primary"><i class="fa fa-filte me-1"></i>Filter
+            </button><button class="btn btn-outline-primary"><i class="fa fa-sort me-1"></i>Sort </button></div>
+    </div>
+
+
+
+    <div class="row">
+        @for (item of searchData; track $index) {
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <h5 class="card-title"><i class="fa fa-bus me-2"></i>{{item.busName}}</h5>
+                            <p class="mb-0"><i class="fa fa-bed me-1"></i>AC Sleeper </p>
+                            <div class="mt-2"><span class="badge bg-success"><i class="fa fa-star me-1"></i>4.5
+                                </span><span class="badge bg-info ms-1"><i class="fa fa-random me-1"></i>Fast </span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="mb-0  ">Departure</p>
+                            <h6 class="mb-0"><i class="fa fa-clock-o me-1"></i>{{item.departureTime | date :'hh:mm:ss'}}</h6>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="mb-0  ">Duration</p>
+                            <h6 class="mb-0"><i class="fa fa-clock-o me-1"></i>8h 30m </h6>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="mb-0  ">Arrival</p>
+                            <h6 class="mb-0"><i class="fa fa-clock-o me-1"></i>{{item.arrivalTime | date :'hh:mm:ss'}}</h6>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="mb-0  ">Price</p>
+                            <h6 class="mb-0"><i class="fa fa-money me-1"></i>{{item.price}} </h6><small
+                                class="text-success"><i class="fa fa-usd me-1"></i>Best Price </small>
+                        </div>
+                        <div class="col-md-1"><a class="btn btn-primary w-100" [routerLink]="'/book-ticket/' + item.scheduleId"><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

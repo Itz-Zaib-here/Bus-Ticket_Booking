@@ -1,0 +1,84 @@
+<div class="main">
+    <div class="col-md-12">
+        <h1 class="text-center text-custom-primary font-50 font-weight-bold">Welcome Aboard Q Connect</h1>
+        <h3 class="text-center font-weight-500">PAKISTAN'S 5 STAR BUS<sup>®</sup></h3>
+        <p class="text-center">Lahore to Islamabad, Bus depart from Metro cash and carry parking area DHA Airport road
+            lahore.</p>
+    </div>
+    <!-- <h1 style="font-family: 'Nova Round';" class="Welcome">Welcome</h1> -->
+    <div class="form-container">
+        <form class="form">
+            <div class="lable lable1">
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+            </div>
+            <div class="container">
+                <select class="input" name="fromLocationId" [(ngModel)]="searchObj.fromLocationId">
+                    @for (item of locationList; track $index) {
+                    <option class="label" [value]="item.locationId">{{item.locationName}}</option>
+                    }
+                </select>
+                <!-- <input required="" type="text" id="SourceCity" name="SourceCity" class="input"> -->
+            </div>
+            <div class="lable">
+                <i class="fa fa-sitemap" aria-hidden="true"></i>
+            </div>
+            <div class="container">
+                <select class="input" name="toLocationId" [(ngModel)]="searchObj.toLocationId">
+                    @for (item of locationList; track $index) {
+                    <option class="label" [value]="item.locationId">{{item.locationName}}</option>
+                    }
+                </select>
+            </div>
+            <div class="lableNone">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+            </div>
+            <div class="container">
+                <div class="container container1">
+                    <mat-datepicker #picker></mat-datepicker>
+                    <input style="padding-left: 50px;" matInput [matDatepicker]="picker" class="input1 input"
+                        placeholder="Date" name="date" [(ngModel)]="searchObj.date">
+                    <label for="Date" class="labelC"><mat-datepicker-toggle matSuffix
+                            [for]="picker"></mat-datepicker-toggle></label>
+                </div>
+            </div>
+        </form>
+
+        <button class="btn" type="button" (click)="searchBus()"><i style="color: white;" class="fa fa-search"
+                aria-hidden="true"></i>
+            SearchBus <i style="color: white;" class="fa fa-bus" aria-hidden="true"></i></button>
+    </div>
+    <div class="col-md-12 mt-4">
+        <h5 class="text-center">At QConnect.pk you can find intercity bus connections in various pakistan cities, as
+            well as international bus connections.</h5>
+    </div>
+
+    <!-- All Routes -->
+<div class="border col-md-6 mt-4">
+  <div class="available-routes p-3" style="max-height: 520px; overflow-y: auto;">
+    <h6 class="mb-3 text-center">
+      <i class="fa fa-bus me-2"></i>Available Routes
+    </h6>
+    <!-- <small>Use Swagger to Create new Bus Routes as Explained in video</small> -->
+
+    <div class="card mb-3" *ngFor="let bus of busSchedules">
+      <div class="card-body p-2">
+        <h6 class="mb-1">
+          <i class="fa fa-map-marker me-1 text-primary"></i>
+          {{ bus.fromLocationName }} 
+          <i class="fa fa-arrow-right mx-2"></i> 
+          {{ bus.toLocationName }}
+        </h6>
+        <small class="text-muted d-block mb-1">
+          <i class="fa fa-calendar me-1"></i>
+          {{ bus.scheduleDate | date: 'dd MMM yyyy, hh:mm a' }}
+        </small>
+        <span class="badge bg-info text-dark">
+          {{ bus.busCount }} buses available
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
